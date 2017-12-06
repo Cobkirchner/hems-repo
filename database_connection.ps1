@@ -11,9 +11,9 @@ $db_connection.ConnectionString = "Server=localhost;Uid=hems_user;Pwd=nF4mTRDT69
 $db_connection.Open()
 
 
-$db_command = New-Object MySql.Data.MySqlClient.MySqlCommand
-$db_command.Connection = $db_connection
-$db_command.CommandText = "SHOW TABLES"
-$reader = $db_command.ExecuteReader()
-while($reader.Read()){ $reader.GetString(0) }
-$db_connection.Close()
+#$db_command = New-Object MySql.Data.MySqlClient.MySqlCommand
+#$db_command.Connection = $db_connection
+#$db_command.CommandText = "SHOW TABLES"
+#$reader = $db_command.ExecuteReader()
+#while($reader.Read()){ $reader.GetString(0) }
+#$db_connection.Close()
