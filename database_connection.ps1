@@ -1,4 +1,4 @@
-﻿[void][System.Reflection.Assembly]::LoadFrom("/home/mysql-connector-net/v4.5/MySql.Data.dll")
+﻿[void][System.Reflection.Assembly]::LoadFrom("/home/mysql-connector-net/v4.0/MySql.Data.dll")
 
 #Initiate the database connection
 $db_server="localhost"
@@ -7,7 +7,6 @@ $db_password="nF4mTRDT69RySz"
 $database="hems"
 $db_connection = New-Object MySql.Data.MySqlClient.MySqlConnection
 $db_connection.ConnectionString = "server=$db_server;user id=$db_user;password=$db_password;database=$database;pooling=false"
-
 $db_connection.Open()
 
 
