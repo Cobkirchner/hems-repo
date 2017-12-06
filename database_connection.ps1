@@ -6,7 +6,7 @@ $db_user="hems_user"
 $db_password="nF4mTRDT69RySz"
 $database="hems"
 $db_connection = New-Object MySql.Data.MySqlClient.MySqlConnection
-$db_connection.ConnectionString = "Server=localhost;Uid=hems_user;Pwd=nF4mTRDT69RySz"
+$db_connection.ConnectionString = "Server=localhost;Uid=root;Pwd=7S2Dh972m8k535"
 #$db_connection.ConnectionString = "server=$db_server;user id=$db_user;password=$db_password;database=$database;pooling=false"
 $db_connection.Open()
 
