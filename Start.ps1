@@ -1,9 +1,9 @@
 ﻿# HEMS Startmenü
 
 #$script_path = "C:\Users\Christian\OneDrive\Studium\Masterarbeit\mITSM\Skripte\Lab_Scripts"
-$script_path = "C:\Hems-Repository\Lab_Scripts" # on MITSM_HYPERV_04
+#$script_path = "C:\Hems-Repository\Lab_Scripts" # on MITSM_HYPERV_04
 
-$xAppName    = "MenuDemo"
+$xAppName    = "Startmenu"
 [BOOLEAN]$global:xExitSession=$false
 function LoadMenuSystem(){
 	[INT]$xMenu1=0
@@ -12,19 +12,13 @@ function LoadMenuSystem(){
 	while ( $xMenu1 -lt 1 -or $xMenu1 -gt 8 ){
 		#CLS
 		#Hauptmenü
-		Write-Host "`n`t Hacking Lab Startmenü`n" 
+		Write-Host "`n`t Startmenü`n" 
 		Write-Host "`t`tTreffen Sie eine Auswahl: `n" 
-		Write-Host "`t`t`t1. Labor verwalten" 
-		Write-Host "`t`t`t2. Umgebung einzelner Teilnehmer verwalten "
-        Write-Host "`t`t`t3. VM Typen verwalten " 
-		Write-Host "`t`t`t4. Einzelne VMs verwalten" 
-		Write-Host "`t`t`t5. Laborübersicht anzeigen" 
-        Write-Host "`t`t`t6. Auslastung Hyper-V ServerCore anzeigen"
-        Write-Host "`t`t`t7. Update lokales Git Repository" 
-        Write-Host "`t`t`t8. Menü verlassen und zur Powershell zurückkehren`n " 
+		Write-Host "`t`t`t1. Administrator" 
+		Write-Host "`t`t`t2. Schulungsanbieter " 
 		#… Retrieve the response from the user
 		[int]$xMenu1 = Read-Host "`t`tOption"
-		if( $xMenu1 -lt 1 -or $xMenu1 -gt 8 ){
+		if( $xMenu1 -lt 1 -or $xMenu1 -gt 2 ){
 			Write-Host "`tSie können nur eine der aufgeführten Möglichkeiten auswählen`n" -Fore Red;start-Sleep -Seconds 1
 		}
 	}
@@ -33,14 +27,14 @@ function LoadMenuSystem(){
 			while ( $xMenu2 -lt 1 -or $xMenu2 -gt 7 ){
 				#CLS
 				# Present the Menu Options
-				Write-Host "`n`tLabor verwalten`n" 
+				Write-Host "`n`tAdministrator`n" 
 				Write-Host "`t`tTreffen Sie eine Auswahl`n" 
-				Write-Host "`t`t`t1. Labor aufsetzen" 
-				Write-Host "`t`t`t2. Labor zurücksetzen" 
-				Write-Host "`t`t`t3. Labor löschen"
-                Write-Host "`t`t`t4. Labor starten" 
-				Write-Host "`t`t`t5. Labor herunterfahren" 
-                Write-Host "`t`t`t6. Labor neustarten" 
+				Write-Host "`t`t`t1. Eventverwaltung" 
+				Write-Host "`t`t`t2. Nutzerverwaltung" 
+				Write-Host "`t`t`t3. Templateverwaltung"
+                Write-Host "`t`t`t4. Übersicht Schulungsanbieter" 
+				Write-Host "`t`t`t5. Cloud Accountverwaltung" 
+                Write-Host "`t`t`t6. Update Git Repository" 
                 Write-Host "`t`t`t7. Hauptmenü`n" 
 				[int]$xMenu2 = Read-Host "`t`tOption: "
 				if( $xMenu2 -lt 1 -or $xMenu2 -gt 7 ){
@@ -179,28 +173,7 @@ function LoadMenuSystem(){
 		default { $global:xExitSession=$true;break }
         
         5 { . $script_path\Manage-Lab\Show-LabOverview.ps1}
-		6 { 
-                while ( $xMenu2 -lt 1 -or $xMenu2 -gt 4 ){
-				#CLS
-				# Present the Menu Options
-				Write-Host "`n`tAuslastung HyperV Core anzeigen`n" 
-				Write-Host "`t`tTreffen Sie eine Auswahl`n" 
-				Write-Host "`t`t`t1. CPU Load" 
-                Write-Host "`t`t`t2. RAM Auslastung" 
-                Write-Host "`t`t`t3. Auslagerungsdatei" 
-				Write-Host "`t`t`t4. Hauptmenü`n" 
-				[int]$xMenu2 = Read-Host "`t`tOption:"
-				if( $xMenu2 -lt 1 -or $xMenu2 -gt 4 ){
-					Write-Host "`tSie können nur eine der aufgeführten Möglichkeiten auswählen`n" -Fore Red;start-Sleep -Seconds 1
-				}
-			}
-			Switch ($xMenu2){
-				1{ . $script_path\Manage-Core\Get-CPULoad.ps1 }
-				2{ . $script_path\Manage-Core\Get-HostMemoryUsage.ps1 }
-				3{ . $script_path\Manage-Core\Get-PageFileInfo.ps1 } 
-				default { Write-Host "`n`tHauptmenü`n" ; break}
-			}}
-        7 { git pull}	
+        6 { git pull}	
 	}
 }
 LoadMenuSystem
