@@ -8,7 +8,7 @@ db = MySQLdb.connect(host="localhost",    # your host, usually localhost
 
 # you must create a Cursor object. It will let
 #  you execute all the queries you need
-cursor = db.cursor()
+cursor = db.cursor(MySQLdb.cursors.DictCursor)
 
 # Use all the SQL you like
 cursor.execute("SELECT participants_id, participants_email, participants_password FROM participants")
