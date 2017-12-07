@@ -11,10 +11,9 @@ db = MySQLdb.connect(host="localhost",    # your host, usually localhost
 cursor = db.cursor()
 
 # Use all the SQL you like
-cursor.execute("SELECT * FROM participants")
+cursor.execute("SELECT participants_id, participants_email, participants_password FROM participants")
 
 # print all the first cell of all the rows
-#for row in cursor.fetchall():
-#    print row[0]
-row = cursor.fetchall()
+for row in cursor.fetchall():
+    print row[0]
 db.close()
