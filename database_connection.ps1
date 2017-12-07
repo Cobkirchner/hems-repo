@@ -1,6 +1,6 @@
-﻿#[void][System.Reflection.Assembly]::LoadFrom("/home/mysql-connector-net/v4.0/MySql.Data.dll")
+﻿[void][System.Reflection.Assembly]::LoadFrom("/home/mysql-connector-net/v4.5/MySql.Data.dll")
 
-Add-Type –Path "/home/mysql-connector-net/v4.5/MySql.Data.dll"
+#Add-Type –Path "/home/mysql-connector-net/v4.5/MySql.Data.dll"
 #Initiate the database connection
 $db_server="localhost"
 $db_user="root"
@@ -15,4 +15,4 @@ $Connection.Open()
 #$db_command.CommandText = "SHOW TABLES"
 #$reader = $db_command.ExecuteReader()
 #while($reader.Read()){ $reader.GetString(0) }
-#$db_connection.Close()
+$Connection.Close()
