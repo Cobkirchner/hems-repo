@@ -17,7 +17,7 @@ cursor.execute("SELECT * FROM participants")
 #for row in cursor.fetchall():
 #    print "%s, %s" % (row["participants_id"], row["participants_email"], row["participants_password"])
 
-for (participants_id, participants_name, participants_email, participants_password) in cur:
-      print("{}, {}, {}, {}".format(participants_id, participants_name, participants_email, participants_password))
+for (participants_name, participants_email, participants_password) in cursor:
+      print("{}, {}, {}".format(participants_name, participants_email, participants_password))
 
 db.close()
