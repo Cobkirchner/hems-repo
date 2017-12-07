@@ -14,6 +14,13 @@ cursor = db.cursor(MySQLdb.cursors.DictCursor)
 cursor.execute("SELECT participants_id, participants_email, participants_password FROM participants")
 
 # print all the first cell of all the rows
-for row in cursor.fetchall():
-    print "%s, %s" % (row["participants_id"], row["participants_email"], row["participants_password"])
+#for row in cursor.fetchall():
+#    print "%s, %s" % (row["participants_id"], row["participants_email"], row["participants_password"])
+
+rows = cursor.fetchall()
+for row in rows:
+    for col in row:
+        print "%s," % col
+    print "\n"
+
 db.close()
