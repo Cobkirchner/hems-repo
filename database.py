@@ -14,7 +14,7 @@ cursor = db.cursor()
 cursor.execute("SELECT * FROM participants")
 
 # print all the first cell of all the rows
-for row in cursor.fetchall():
-    print row[0]
-
+#for row in cursor.fetchall():
+#    print row[0]
+row = cursor.fetchall()
 db.close()
