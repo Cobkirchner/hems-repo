@@ -1,4 +1,4 @@
-﻿[void][System.Reflection.Assembly]::LoadFrom("/home/mysql-connector-net/v4.5/MySql.Data.dll")
+﻿[void][System.Reflection.Assembly]::LoadFrom("/home/mysql-connector-net/v4.0/MySql.Data.dll")
 
 #Initiate the database connection
 $db_server="localhost"
