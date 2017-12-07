@@ -15,5 +15,5 @@ cursor.execute("SELECT participants_id, participants_email, participants_passwor
 
 # print all the first cell of all the rows
 for row in cursor.fetchall():
-    print row[0]
+    print "%s, %s" % (row["participants_id"], row["participants_email"], row["participants_password"])
 db.close()
