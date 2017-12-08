@@ -39,7 +39,7 @@ def insert_participant(surname, name, email, password):
         conn.close()
  
 def main():
-   insert_participant('surname','name','email','password')
+   insert_participant(surname, name, email, password)
  
 if __name__ == '__main__':
     main()
