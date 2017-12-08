@@ -8,12 +8,8 @@ import sys
 
 print ('Which user data do you want to change? Please enter the values you want to change: ')
 surname = raw_input('Please enter surname: ')
-for val in surname:
-    if val == "":
-        continue
-    print ("Please enter a value")
-
-print("The end")
+for len(surname) == 0:
+    surname = raw_input('Please enter surname: ')
 
 
 

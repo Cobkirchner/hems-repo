@@ -10,8 +10,21 @@ from python_mysql_dbconfig import read_db_config
 surname = raw_input('Please enter surname: ')
 name = raw_input('Please enter name: ')
 email = raw_input('Please enter email: ')
-password = raw_input('Please enter password: ')
+#password = raw_input('Please enter password: ')
 #print "You entered:", surname, name, email, password
+
+import random
+
+alphabet = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+pw_length = 8
+mypw = ""
+
+for i in range(pw_length):
+    next_index = random.randrange(len(alphabet))
+    mypw = mypw + alphabet[next_index]
+
+password = mypw
+
 
 def insert_participant(surname, name, email, password):
     query = "INSERT INTO participants(participants_surname,participants_name,participants_email,participants_password) " \
