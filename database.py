@@ -5,30 +5,28 @@ from mysql.connector import MySQLConnection, Error
 from python_mysql_dbconfig import read_db_config
  
  
-def connect():
-    """ Connect to MySQL database """
- 
-    db_config = read_db_config()
- 
+def query_with_fetchall():
     try:
-        print('Connecting to MySQL database...')
-        conn = MySQLConnection(**db_config)
+        dbconfig = read_db_config()
+        conn = MySQLConnection(**dbconfig)
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM participants")
+        rows = cursor.fetchall()
  
-        if conn.is_connected():
-            print('connection established.')
-        else:
-            print('connection failed.')
+        print('Total Row(s):', cursor.rowcount)
+        for row in rows:
+            print(row)
  
-    except Error as error:
-        print(error)
+    except Error as e:
+        print(e)
  
     finally:
+        cursor.close()
         conn.close()
-        print('Connection closed.')
  
  
 if __name__ == '__main__':
-    connect()
+    query_with_fetchall()
 
 
 
