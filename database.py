@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import mysql;
+# import mysql;
 import mysql.connector;
 
 # Verbindung erstellen
