@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import Mysqldb;
+import mysql;
+import mysql.connector;
 
 # Verbindung erstellen
 try:
-    connection = Mysqldb.connect(host="localhost",    # your host, usually localhost
+    connection = mysql.connector.connect(host="localhost",    # your host, usually localhost
                      user="hems_user",         # your username
                      passwd="nF4mTRDT69RySz",  # your password
                      db="hems")        # name of the data base
