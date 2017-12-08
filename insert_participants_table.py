@@ -7,10 +7,10 @@ from mysql.connector import MySQLConnection, Error
 from python_mysql_dbconfig import read_db_config
 
 #def read_from_cli(surname, name, email, password):
-    surname = input("Please enter surname: ")
-    name = input("Please enter name: ")
-    email = input("Please enter email: ")
-    password = input("Please enter password: ")
+    surname = input('Please enter surname: ')
+    name = input('Please enter name: ')
+    email = input('Please enter email: ')
+    password = input('Please enter password: ')
 
     print "You entered:", surname, name, email, password
 
