@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import sys
-surname = input('Please enter surname: ')
-name = input('Please enter name: ')
-email = input('Please enter email: ')
-password = input('Please enter password: ')
+surname = raw_input('Please enter surname: ')
+name = raw_input('Please enter name: ')
+email = raw_input('Please enter email: ')
+password = raw_input('Please enter password: ')
 print "You entered:" + str(surname) + str(name) + str(email) + str(password)
