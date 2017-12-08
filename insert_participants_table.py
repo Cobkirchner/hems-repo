@@ -6,7 +6,7 @@ import sys
 from mysql.connector import MySQLConnection, Error
 from python_mysql_dbconfig import read_db_config
 
-def read_from_cli(surname, name, email, password)
+def read_from_cli(surname, name, email, password):
     surname = raw_input("Please enter surname: ")
     name = raw_input("Please enter name: ")
     email = raw_input("Please enter email: ")
