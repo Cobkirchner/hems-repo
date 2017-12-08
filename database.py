@@ -11,12 +11,35 @@ def query_with_fetchall():
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM participants")
-        rows = cursor.fetchall()
+        results = cursor.fetchall()
  
-        print('Total Row(s):', cursor.rowcount)
-        for row in rows:
-            print(row)
+       # print('Total Row(s):', cursor.rowcount)
+        #for row in rows:
+        #    print(row)
  
+
+        widths = []
+        columns = []
+        tavnit = '|'
+        separator = '+' 
+
+        for cd in cursor.description:
+            widths.append(max(cd[2], len(cd[0])))
+            columns.append(cd[0])
+
+        for w in widths:
+            tavnit += " %-"+"%ss |" % (w,)
+            separator += '-'*w + '--+'
+
+        print(separator)
+        print(tavnit % tuple(columns))
+        print(separator)
+        for row in results:
+            print(tavnit % row)
+        print(separator)
+
+
+
     except Error as e:
         print(e)
  
@@ -25,16 +48,8 @@ def query_with_fetchall():
         conn.close()
  
  
+
+
+
 if __name__ == '__main__':
     query_with_fetchall()
-
-
-
-# Datensätze auslesen
-#cursor = connection.cursor()
-#cursor.execute("SELECT * from participants")
-#result = cursor.fetchall()
-#cursor.close()
-
-#for data in result:
-#    print(str(data[0]) + data[1] + data[2])
