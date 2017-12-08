@@ -5,7 +5,7 @@ from mysql.connector import MySQLConnection, Error
 from python_mysql_dbconfig import read_db_config
  
  
-def query_with_fetchall():
+def query_participants_table():
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
@@ -13,11 +13,6 @@ def query_with_fetchall():
         cursor.execute("SELECT * FROM participants")
         results = cursor.fetchall()
  
-       # print('Total Row(s):', cursor.rowcount)
-        #for row in rows:
-        #    print(row)
- 
-
         widths = []
         columns = []
         tavnit = '|'
@@ -52,4 +47,4 @@ def query_with_fetchall():
 
 
 if __name__ == '__main__':
-    query_with_fetchall()
+    query_participants_table()
