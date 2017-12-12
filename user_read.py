@@ -5,12 +5,12 @@ from mysql.connector import MySQLConnection, Error
 from python_mysql_dbconfig import read_db_config
  
  
-def query_participants_table():
+def user_read():
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM participants")
+        cursor.execute("SELECT * FROM user")
         results = cursor.fetchall()
  
         widths = []
@@ -47,4 +47,4 @@ def query_participants_table():
 
 
 if __name__ == '__main__':
-    query_participants_table()
+   user_read()

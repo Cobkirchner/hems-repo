@@ -27,7 +27,7 @@ password = mypw
 
 
 def insert_participant(surname, name, email, password):
-    query = "INSERT INTO participants(participants_surname,participants_name,participants_email,participants_password) " \
+    query = "INSERT INTO user(surname,name,email,password) " \
             "VALUES(%s,%s,%s,%s)"
     args = (surname, name, email, password)
  

@@ -5,12 +5,12 @@ from mysql.connector import MySQLConnection, Error
 from python_mysql_dbconfig import read_db_config
  
  
-def query_events_table():
+def event_read():
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM events")
+        cursor.execute("SELECT * FROM event")
         results = cursor.fetchall()
  
         widths = []
@@ -44,4 +44,4 @@ def query_events_table():
 
 
 if __name__ == '__main__':
-    query_events_table()
+    event_read()
