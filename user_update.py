@@ -6,7 +6,7 @@ import sys
 #from mysql.connector import MySQLConnection, Error
 #from python_mysql_dbconfig import read_db_config
 
-def ask(surname, name, email)
+def ask(surname, name, email):
 
     print ('Which user data do you want to change? Please enter the values you want to change: ')
     surname = raw_input('Please enter surname to update: ')
