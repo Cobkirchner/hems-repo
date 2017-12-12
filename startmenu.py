@@ -24,10 +24,10 @@ menu_actions  = {}
 def main_menu():
     os.system('clear')
     
-    print "Welcome,\n"
-    print "Please choose the menu you want to start:"
-    print "1. Menu 1"
-    print "2. Menu 2"
+    print "Willkommen,\n"
+    print "Bitte wählen Sie eine Rolle aus:"
+    print "(1) Administrator"
+    print "(2) Schulungsanbieter"
     print "\n0. Quit"
     choice = raw_input(" >>  ")
     exec_menu(choice)
@@ -44,23 +44,32 @@ def exec_menu(choice):
         try:
             menu_actions[ch]()
         except KeyError:
-            print "Invalid selection, please try again.\n"
+            print "Ungültige Eingabe.\n"
             menu_actions['main_menu']()
     return
 
-# Menu 1
+# =======================
+#    MENU Administrator
+# =======================
 def menu1():
-    print "Hello Menu 1 !\n"
-    print "9. Back"
-    print "0. Quit"
+    print "Administratormenü !\n"
+    print "(1) Cloud Accountverwaltung"
+    print "(2) Eventverwaltung"
+    print "(3) Nutzerverwaltung"
+    print "(4) Konfigurationsverwaltung"
+    print "(5) Templateverwaltung"
+    print "(6) Schulungsanbieterverwaltung"
+    print "(0) Ende"
     choice = raw_input(" >>  ")
     exec_menu(choice)
     return
 
 
-# Menu 2
+# =======================
+#    MENU Schulungsanbieter
+# =======================
 def menu2():
-    print "Hello Menu 2 !\n"
+    print "Schulungsanbieter Menü !\n"
     print "9. Back"
     print "0. Quit" 
     choice = raw_input(" >>  ")
