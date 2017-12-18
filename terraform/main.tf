@@ -34,7 +34,7 @@ resource "azurerm_network_interface" "nic" {
 
   ip_configuration {
     count               = "${var.instance_count}"  
-    name                          = "${var.hostname[count.index]}ipconfig"
+    name                          = "${var.hostname[count.index]}"
     subnet_id                     = "${azurerm_subnet.subnet.id[count.index]}"
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = "${azurerm_public_ip.pip.id[count.index]}"
@@ -43,7 +43,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_public_ip" "pip" {
   count               = "${var.instance_count}"  
-  name                         = "${var.hostname[count.index]}-ip"
+  name                         = "${var.hostname[count.index]}"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "Dynamic"
@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   storage_os_disk {
     count               = "${var.instance_count}"  
-    name          = "${var.hostname[count.index]}-osdisk1"
+    name          = "${var.hostname[count.index]}"
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
     os_type       = "${var.os_type}"
