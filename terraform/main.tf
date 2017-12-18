@@ -5,6 +5,9 @@
 #   tenant_id       = "ba5e6b38-2d31-46a5-8554-b9d0961b048c"
 # }
 
+ # This will create 4 instances
+count = 4  
+
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_group}"
   location = "${var.location}"
@@ -70,6 +73,5 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile_linux_config {
     disable_password_authentication = false
     }
-  # This will create 4 instances
-  count = 4  
+ 
 }
