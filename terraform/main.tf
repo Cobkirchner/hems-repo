@@ -28,12 +28,12 @@ resource "azurerm_subnet" "subnet" {
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = "${var.hostname.*}nic"
+  name                = "${var.hostname.*.id}nic"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
-    name                          = "${var.hostname.*}ipconfig"
+    name                          = "${var.hostname.*.id}ipconfig"
     subnet_id                     = "${azurerm_subnet.subnet.id}"
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = "${azurerm_public_ip.pip.id}"
@@ -41,7 +41,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_public_ip" "pip" {
-  name                         = "${var.hostname.*}-ip"
+  name                         = "${var.hostname.*.id}-ip"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "Dynamic"
@@ -49,14 +49,14 @@ resource "azurerm_public_ip" "pip" {
 }
 
 resource "azurerm_virtual_machine" "vm" {
-  name                  = "${var.hostname.*}"
+  name                  = "${var.hostname.*.id}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
 
   storage_os_disk {
-    name          = "${var.hostname.*}-osdisk1"
+    name          = "${var.hostname.*.id}-osdisk1"
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
     os_type       = "${var.os_type}"
@@ -65,7 +65,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   os_profile {
-    computer_name  = "${var.hostname.*}"
+    computer_name  = "${var.hostname.*.id}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
   }
