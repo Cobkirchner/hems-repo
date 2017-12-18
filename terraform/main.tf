@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "ipconfig${count.index}"
     subnet_id                     = "${azurerm_subnet.subnet.id[count.index]}"
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = ["${element(azurerm_public_ip.pip.*.id, count.index)}"]
+    public_ip_address_id          = "${element(azurerm_public_ip.pip.*.id, count.index)}"
   }
 }
 
@@ -55,7 +55,7 @@ resource "azurerm_virtual_machine" "vm" {
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
-  network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
+  network_interface_ids = "${element(azurerm_network_interface.nic.*.id, count.index)}"
 
   storage_os_disk {
     count               = "${var.instance_count}"  
