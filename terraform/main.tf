@@ -28,39 +28,38 @@ resource "azurerm_subnet" "subnet" {
 
 resource "azurerm_network_interface" "nic" {
   count               = "${var.instance_count}"  
-  name                = "${var.hostname[count.index]}"
+  name                = "nic${count.index}"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
-    count               = "${var.instance_count}"  
-    name                          = "${var.hostname[count.index]}"
+    name                          = "ipconfig${count.index}"
     subnet_id                     = "${azurerm_subnet.subnet.id[count.index]}"
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = "${azurerm_public_ip.pip.id[count.index]}"
+    public_ip_address_id          = ["${element(azurerm_public_ip.pip.*.id, count.index)}"]
   }
 }
 
 resource "azurerm_public_ip" "pip" {
   count               = "${var.instance_count}"  
-  name                         = "${var.hostname[count.index]}"
+  name                         = "pip${count.index}"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "Dynamic"
-  domain_name_label            = "${var.hostname[count.index]}"
+  domain_name_label            = "pip${count.index}"
 }
 
 resource "azurerm_virtual_machine" "vm" {
   count               = "${var.instance_count}"
-  name                  = "${var.hostname[count.index]}"
+  name                  = "vm${count.index}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
-  network_interface_ids = ["${azurerm_network_interface.nic.id[count.index]}"]
+  network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
 
   storage_os_disk {
     count               = "${var.instance_count}"  
-    name          = "${var.hostname[count.index]}"
+    name          = "osdisk${count.index}"
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
     os_type       = "${var.os_type}"
@@ -70,7 +69,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile {
     count               = "${var.instance_count}"  
-    computer_name  = "${var.hostname[count.index]}"
+    computer_name  = "osprofile${count.index}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
   }
