@@ -49,6 +49,7 @@ resource "azurerm_public_ip" "pip" {
   domain_name_label            = "hypervcontainer-pip${count.index}"
 }
 
+
 resource "azurerm_virtual_machine" "vm" {
   count               = "${var.instance_count}"
   name                  = "hypervcontainer-${count.index}"
@@ -65,5 +66,16 @@ resource "azurerm_virtual_machine" "vm" {
     caching       = "ReadWrite"
     create_option = "FromImage"
   }
+
+  os_profile {  
+    computer_name  = "hypervcontainer-${count.index}"
+    admin_username = "${var.admin_username}"
+    admin_password = "${var.admin_password}"
+  }
+
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+
 
 }
