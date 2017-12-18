@@ -4,31 +4,47 @@
 ## Text menu in Python
 
 
-menupoint_1 = "1. Administrator"
-menupoint_2 = "2. Schulungsanbieter"
-menupoint_3 = "3. Ende"
+menupoint_1 = "1. Cloud Accountverwaltung"
+menupoint_2 = "2. Eventverwaltung"
+menupoint_3 = "3. Nutzerverwaltung"
+menupoint_4 = "4. Konfigurationsverwaltung"
+menupoint_5 = "5. Templateverwaltung"
+menupoint_6 = "6. Ende"
+
       
 def print_menu():       ## Your menu design here
-    print 28 * "-" , "Startmenue" , 28 * "-"
+    print 22 * "-" , "Menue Schulungsanbieter" , 22 * "-"
     print menupoint_1
     print menupoint_2
     print menupoint_3
+    print menupoint_4
+    print menupoint_5
+    print menupoint_6
     print 67 * "-"
   
 loop=True      
   
 while loop:          ## While loop which will keep going until loop = False
     print_menu()    ## Displays menu
-    choice = input("Ihre Auswahl [1-3]: ")
+    choice = input("Ihre Auswahl [1-6]: ")
      
     if choice==1:     
         print menupoint_1
-        execfile('menu_admin.py')
+        execfile('cloudaccount.py')
     elif choice==2:
         print menupoint_2
-        execfile('menu_training_provider.py')
+        execfile('event.py')
     elif choice==3:
         print menupoint_3
+        execfile('user.py')
+    elif choice==4:
+        print menupoint_4
+        execfile('configuration.py')
+    elif choice==5:
+        print menupoint_5
+        execfile('template.py')
+    elif choice==6:
+        print menupoint_6
         exit()    
         loop=False # This will make the while loop to end as not value of loop is set to False
     else:
