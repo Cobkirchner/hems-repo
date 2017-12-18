@@ -45,18 +45,18 @@ resource "azurerm_public_ip" "pip" {
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "Dynamic"
-  domain_name_label            = ["${element(var.hostname.*, count.index)}]
+  domain_name_label            = ["${element(var.hostname.*, count.index)}"]
 }
 
 resource "azurerm_virtual_machine" "vm" {
-  name                  = ["${element(var.hostname.*, count.index)}]
+  name                  = ["${element(var.hostname.*, count.index)}"]
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
 
   storage_os_disk {
-    name          = ["${element(var.hostname.*, count.index)}-osdisk1"
+    name          = ["${element(var.hostname.*, count.index)}-osdisk1"]
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
     os_type       = "${var.os_type}"
