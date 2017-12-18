@@ -5,6 +5,7 @@ variable "resource_group" {
 
 variable "image_uri" {
   description = "Specifies the image_uri in the form publisherName:offer:skus:version. image_uri can also specify the VHD uri of a custom VM image to clone."
+  default = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
 }
 
 variable "os_type" {
