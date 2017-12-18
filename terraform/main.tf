@@ -34,7 +34,7 @@ resource "azurerm_network_interface" "nic" {
 
   ip_configuration {
     count               = "${var.instance_count}"  
-    name                          = "${var.hostname}${count.index}ipconfig"]
+    name                          = "${var.hostname}${count.index}ipconfig"
     subnet_id                     = "${azurerm_subnet.subnet.id}"
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = "${azurerm_public_ip.pip.id}"
