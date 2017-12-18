@@ -34,7 +34,7 @@ resource "azurerm_network_interface" "nic" {
 
   ip_configuration {
     count               = "${var.instance_count}"  
-    name                          = "${element(var.hostname.*.id, count.index)}ipconfig"
+    name                          = "${element(var.hostname, count.index)}ipconfig"
     subnet_id                     = "${azurerm_subnet.subnet.id}"
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = "${azurerm_public_ip.pip.id}"
@@ -43,7 +43,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_public_ip" "pip" {
   count               = "${var.instance_count}"  
-  name                         = "${element(var.hostname.*.id, count.index)}-ip"
+  name                         = "${element(var.hostname, count.index)}-ip"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "Dynamic"
@@ -52,7 +52,7 @@ resource "azurerm_public_ip" "pip" {
 
 resource "azurerm_virtual_machine" "vm" {
   count               = "${var.instance_count}"
-  name                  = "${element(var.hostname.*.id, count.index)}"
+  name                  = "${element(var.hostname, count.index)}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   storage_os_disk {
     count               = "${var.instance_count}"  
-    name          = "${element(var.hostname.*.id, count.index)}-osdisk1"
+    name          = "${element(var.hostname, count.index)}-osdisk1"
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
     os_type       = "${var.os_type}"
@@ -70,7 +70,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile {
     count               = "${var.instance_count}"  
-    computer_name  = "${element(var.hostname.*.id, count.index)}"
+    computer_name  = "${element(var.hostname, count.index)}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
   }
