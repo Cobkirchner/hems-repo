@@ -55,10 +55,9 @@ resource "azurerm_virtual_machine" "vm" {
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
-  network_interface_ids = "${element(azurerm_network_interface.nic.*.id, count.index)}"
+  network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
 
-  storage_os_disk {
-    count               = "${var.instance_count}"  
+  storage_os_disk {  
     name          = "osdisk${count.index}"
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
@@ -67,8 +66,7 @@ resource "azurerm_virtual_machine" "vm" {
     create_option = "FromImage"
   }
 
-  os_profile {
-    count               = "${var.instance_count}"  
+  os_profile {  
     computer_name  = "osprofile${count.index}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
