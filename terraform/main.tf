@@ -43,7 +43,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_public_ip" "pip" {
   count               = "${var.instance_count}"  
-  name                         = ["${element(var.hostname.*.id,count.index)}-ip"
+  name                         = "${element(var.hostname.*.id,count.index)}-ip"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "Dynamic"
