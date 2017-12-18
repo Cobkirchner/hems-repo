@@ -5,7 +5,7 @@ variable "resource_group" {
 
 variable "image_uri" {
   description = "Specifies the image_uri in the form publisherName:offer:skus:version. image_uri can also specify the VHD uri of a custom VM image to clone."
-  default = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
+  default = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container2.vhd"
 }
 
 variable "os_type" {
@@ -33,6 +33,12 @@ variable "storage_account_name" {
   default = "hemsstorage"
 }
 
+variable "storage_container_name" {
+
+  description = "Storage Container Name"
+  default = "hemscontainer"
+}
+
 variable "storage_account_type" {
   description = "Defines the type of storage account to be created. Valid options are Standard_LRS, Standard_ZRS, Standard_GRS, Standard_RAGRS, Premium_LRS. Changing this is sometimes valid - see the Azure documentation for more information on which types of accounts can be converted into other types."
   default     = "Standard_LRS"
@@ -45,17 +51,17 @@ variable "vm_size" {
 
 variable "hostname" {
   description = "VM name referenced also in storage-related names. This is also used as the label for the Domain Name and to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-  default = "hyperv"
+  default = "hypervcontainer-"
 }
 
 variable "admin_username" {
   description = "administrator user name"
-  default     = "Administrator"
+  default     = "root"
 }
 
 variable "admin_password" {
   description = "The Password for the account specified in the 'admin_username' field. We recommend disabling Password Authentication in a Production environment."
-  default = "HyperV_2017"
+  default = "HyperV_Terraform"
 }
 
 variable "instance_count" {

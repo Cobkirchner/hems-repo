@@ -1,0 +1,1 @@
+﻿Add-NetNatStaticMapping -NatName NATSwitch -Protocol TCP -ExternalIPAddress 0.0.0.0 -ExternalPort 222 -InternalIPAddress 10.42.1.2 -InternalPort 22
