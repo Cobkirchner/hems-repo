@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   storage_os_disk {
     count               = "${var.instance_count}"  
-    name          = ["${element(var.hostname.*.id,count.index)}-osdisk1"
+    name          = "${element(var.hostname.*.id,count.index)}-osdisk1"
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
     os_type       = "${var.os_type}"
@@ -70,7 +70,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile {
     count               = "${var.instance_count}"  
-    computer_name  = ["${element(var.hostname.*.id,count.index)}"
+    computer_name  = "${element(var.hostname.*.id,count.index)}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
   }
