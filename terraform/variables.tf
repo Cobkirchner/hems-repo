@@ -44,7 +44,7 @@ variable "vm_size" {
 
 variable "hostname" {
   description = "VM name referenced also in storage-related names. This is also used as the label for the Domain Name and to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-  defaut = "HyperV_"
+  default = "HyperV_"
 }
 
 variable "admin_username" {
