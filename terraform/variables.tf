@@ -30,6 +30,7 @@ variable "subnet_prefix" {
 
 variable "storage_account_name" {
   description = "The name of the storage account in which the image from which you are cloning resides."
+  default = "hemsstorage"
 }
 
 variable "storage_account_type" {
@@ -44,7 +45,7 @@ variable "vm_size" {
 
 variable "hostname" {
   description = "VM name referenced also in storage-related names. This is also used as the label for the Domain Name and to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-  default = "HyperV_"
+  default = "hyperv"
 }
 
 variable "admin_username" {
