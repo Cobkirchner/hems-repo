@@ -43,16 +43,16 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_public_ip" "pip" {
   count               = "${var.instance_count}"  
-  name                         = ["${element(var.hostname, count.index)}-ip"]
+  name                         = "${var.hostname}${count.index}-ip"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "Dynamic"
-  domain_name_label            = ["${element(var.hostname, count.index)}"]
+  domain_name_label            = "${var.hostname}${count.index}"
 }
 
 resource "azurerm_virtual_machine" "vm" {
   count               = "${var.instance_count}"
-  name                  = ["${element(var.hostname, count.index)}"]
+  name                  = "${var.hostname}${count.index}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   storage_os_disk {
     count               = "${var.instance_count}"  
-    name          = ["${element(var.hostname, count.index)}-osdisk1"]
+    name          = "${var.hostname}${count.index}-osdisk1"
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
     os_type       = "${var.os_type}"
@@ -70,7 +70,7 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile {
     count               = "${var.instance_count}"  
-    computer_name  = ["${element(var.hostname, count.index)}"]
+    computer_name  = "${var.hostname}${count.index}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
   }
