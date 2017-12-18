@@ -54,5 +54,5 @@ variable "admin_username" {
 
 variable "admin_password" {
   description = "The Password for the account specified in the 'admin_username' field. We recommend disabling Password Authentication in a Production environment."
-  default = HyperV_2017
+  default = "HyperV_2017"
 }
