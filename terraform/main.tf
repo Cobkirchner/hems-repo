@@ -28,7 +28,7 @@ resource "azurerm_subnet" "subnet" {
 
 resource "azurerm_network_interface" "nic" {
   count               = "${var.instance_count}"  
-  name                = "${element(var.hostname.*.id, count.index)}nic"
+  name                = "${element(var.hostname, count.index)}nic"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
