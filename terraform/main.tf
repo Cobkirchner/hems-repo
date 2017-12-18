@@ -27,11 +27,13 @@ resource "azurerm_subnet" "subnet" {
 }
 
 resource "azurerm_network_interface" "nic" {
+  count               = "${var.instance_count}"  
   name                = ["${var.hostname.[count.index]}nic"]
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
+    count               = "${var.instance_count}"  
     name                          = ["${var.hostname.[count.index]}ipconfig"]
     subnet_id                     = "${azurerm_subnet.subnet.id}"
     private_ip_address_allocation = "Dynamic"
@@ -40,6 +42,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_public_ip" "pip" {
+  count               = "${var.instance_count}"  
   name                         = ["${var.hostname.[count.index]}-ip"]
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
@@ -48,6 +51,7 @@ resource "azurerm_public_ip" "pip" {
 }
 
 resource "azurerm_virtual_machine" "vm" {
+  count               = "${var.instance_count}"
   name                  = ["${var.hostname.[count.index]}"]
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
@@ -55,6 +59,7 @@ resource "azurerm_virtual_machine" "vm" {
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
 
   storage_os_disk {
+    count               = "${var.instance_count}"  
     name          = ["${var.hostname.[count.index]}-osdisk1"]
     image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container.vhd"
@@ -64,6 +69,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   os_profile {
+    count               = "${var.instance_count}"  
     computer_name  = ["${var.hostname.[count.index]}"]
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
@@ -72,7 +78,6 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-# This will create 4 instances
-count = 4  
+
 
 }
