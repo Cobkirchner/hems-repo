@@ -55,6 +55,7 @@ def event_read():
 
 #Instances read
 def instances_read():
+    print "Event ID: 4"
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
