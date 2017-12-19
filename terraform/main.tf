@@ -64,7 +64,7 @@ resource "azurerm_virtual_machine" "vm" {
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container${count.index}.vhd"
     os_type       = "${var.os_type}"
     caching       = "ReadWrite"
-    create_option = "FromImage"
+    create_option = "Attach"
   }
 
   os_profile {  
