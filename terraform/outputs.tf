@@ -7,5 +7,6 @@ output "vm_fqdn" {
 }
 
 output "ssh_command" {
-  value = "${concat("ssh ", var.admin_username, "@", azurerm_public_ip.pip.*.id)}"
+ # value = "${concat("ssh ", var.admin_username, "@", azurerm_public_ip.pip.*.id)}"
+ value ="ssh ${var.admin_username}@${azurerm_public_ip.pip.*.id}"
 }
