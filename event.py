@@ -51,7 +51,7 @@ while loop:          ## While loop which will keep going until loop = False
         raw_input("Falsche Auswahl. Zum Fortfahren beliebige Taste drücken...")
 
 #Event read
-def def event_read():
+def event_read():
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
