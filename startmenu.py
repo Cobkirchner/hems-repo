@@ -21,7 +21,7 @@ loop=True
   
 while loop:          ## While loop which will keep going until loop = False
     print_menu()    ## Displays menu
-    choice = input("Ihre Auswahl [1-3]: ")
+    choice = input("Ihre Auswahl [1-4]: ")
      
     if choice==1:     
         print menupoint_1
