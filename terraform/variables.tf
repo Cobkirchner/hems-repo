@@ -67,5 +67,5 @@ variable "admin_password" {
 
 variable "instance_count" {
   description = "Number of Instances"
-  default = "4"
+  default = "2"
 }
