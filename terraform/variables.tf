@@ -8,6 +8,7 @@ variable "image_uri" {
   default = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container2.vhd"
 }
 
+
 variable "os_type" {
   description = "Specifies the operating system Type, valid values are windows, linux."
   default     = "windows"
