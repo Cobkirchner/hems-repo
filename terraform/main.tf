@@ -41,7 +41,6 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
-}
 resource "azurerm_public_ip" "pip" {
   count               = "${var.instance_count}"  
   name                         = "hypervcon-pip${count.index}"
