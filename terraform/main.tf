@@ -52,7 +52,7 @@ resource "azurerm_public_ip" "pip" {
 
 resource "azurerm_virtual_machine" "vm" {
   count               = "${var.instance_count}"
-  name                  = "hypervcon-${count.index}"
+  name                  = "hypervcon${count.index}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
@@ -68,7 +68,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   os_profile {  
-    computer_name  = "hypervcon-${count.index}"
+    computer_name  = "hypervcon${count.index}"
     admin_username = "${var.admin_username}"
     admin_password = "${var.admin_password}"
   }
