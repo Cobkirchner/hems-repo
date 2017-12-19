@@ -73,5 +73,9 @@ resource "azurerm_virtual_machine" "vm" {
     admin_password = "${var.admin_password}"
   }
 
+  os_profile_windows_config {
+    enable_automatic_upgrades = false
+  }
+
 
 }
