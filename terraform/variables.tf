@@ -57,12 +57,12 @@ variable "hostname" {
 
 variable "admin_username" {
   description = "administrator user name"
-  default     = "root"
+  default     = "user123"
 }
 
 variable "admin_password" {
   description = "The Password for the account specified in the 'admin_username' field. We recommend disabling Password Authentication in a Production environment."
-  default = "HyperV_Terraform"
+  default = "User123-Terraform"
 }
 
 variable "instance_count" {
