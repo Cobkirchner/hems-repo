@@ -53,43 +53,6 @@ def event_read():
 
 #Event delete
 
-#Instances read
-def instances_read():
-    try:
-        dbconfig = read_db_config()
-        conn = MySQLConnection(**dbconfig)
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM instances")
-        results = cursor.fetchall()
- 
-        widths = []
-        columns = []
-        tavnit = '|'
-        separator = '+' 
-
-        for cd in cursor.description:
-            widths.append(max(cd[2], len(cd[0])))
-            columns.append(cd[0])
-
-        for w in widths:
-            tavnit += " %-"+"%ss |" % (w,)
-            separator += '-'*w + '--+'
-
-        print(separator)
-        print(tavnit % tuple(columns))
-        print(separator)
-        for row in results:
-            print(tavnit % row)
-        print(separator)
-
-
-
-    except Error as e:
-        print(e)
- 
-    finally:
-        cursor.close()
-        conn.close()
 
 
 #Menu selection
@@ -97,8 +60,7 @@ menupoint_1 = "1. Events anzeigen"
 menupoint_2 = "2. Event hinzufügen"
 menupoint_3 = "3. Event löschen"
 menupoint_4 = "4. Event ändern"
-menupoint_5 = "5. Instanzen zu einem Event anzeigen"
-menupoint_6 = "6. Ende"
+menupoint_5 = "5. Ende"
 
 def print_menu():       ## Your menu design here
     print 30 * "-" , "MENU" , 30 * "-"
@@ -107,14 +69,13 @@ def print_menu():       ## Your menu design here
     print menupoint_3
     print menupoint_4
     print menupoint_5
-    print menupoint_6
     print 67 * "-"
   
 loop=True      
   
 while loop:          ## While loop which will keep going until loop = False
     print_menu()    ## Displays menu
-    choice = input("Ihre Auswahl [1-6]: ")
+    choice = input("Ihre Auswahl [1-5]: ")
      
     if choice==1:     
         print menupoint_1
@@ -129,9 +90,6 @@ while loop:          ## While loop which will keep going until loop = False
         print menupoint_4
         ## You can add your code or functions here
     elif choice==5:
-        print menupoint_5
-        instances_read
-    elif choice==6:
         print menupoint_5
         exit()    
         loop=False # This will make the while loop to end as not value of loop is set to False
