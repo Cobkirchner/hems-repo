@@ -40,8 +40,7 @@ resource "azurerm_network_interface" "nic" {
 
   }
 }
-output "public_ips" {
-  value = ["${azurerm_public_ip.pip.*.id}"]
+
 }
 resource "azurerm_public_ip" "pip" {
   count               = "${var.instance_count}"  
