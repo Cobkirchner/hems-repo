@@ -130,7 +130,7 @@ while loop:          ## While loop which will keep going until loop = False
         ## You can add your code or functions here
     elif choice==5:
         print menupoint_5
-        instances_read
+        instances_read()
     elif choice==6:
         print menupoint_5
         exit()    
