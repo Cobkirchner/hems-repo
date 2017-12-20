@@ -60,22 +60,22 @@ resource "azurerm_virtual_machine" "vm" {
 
     storage_os_disk {  
     name          = "hypervcon-osdisk${count.index}"
-    image_uri     = "${var.image_uri}"
+    #image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hvc_osdisk${count.index}.vhd"
-    os_type       = "${var.os_type}"
+    #os_type       = "${var.os_type}"
     caching       = "ReadWrite"
-    create_option = "FromImage"
+    create_option = "Attach"
   }
 
-  os_profile {  
-    computer_name  = "hypervcon${count.index}"
-    admin_username = "${var.admin_username}"
-    admin_password = "${var.admin_password}${count.index}"
-  }
+  #os_profile {  
+  #  computer_name  = "hypervcon${count.index}"
+   # admin_username = "${var.admin_username}"
+    #admin_password = "${var.admin_password}${count.index}"
+  #}
 
-  os_profile_windows_config {
-    enable_automatic_upgrades = false
-  }
+  #os_profile_windows_config {
+  #  enable_automatic_upgrades = false
+  #}
 
 
 }
