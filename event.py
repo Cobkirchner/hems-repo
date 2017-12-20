@@ -160,7 +160,7 @@ while loop:          ## While loop which will keep going until loop = False
         event_read()
     elif choice==2:
         print menupoint_2
-        ## You can add your code or functions here
+        event_create()
     elif choice==3:
         print menupoint_3
         ## You can add your code or functions here
