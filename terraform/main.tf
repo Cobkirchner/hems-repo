@@ -61,7 +61,7 @@ resource "azurerm_virtual_machine" "vm" {
     storage_os_disk {  
     name          = "hypervcon-osdisk${count.index}"
     image_uri     = "${var.image_uri}"
-    vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container${count.index}.vhd"
+    vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hvc_osdisk${count.index}.vhd"
     os_type       = "${var.os_type}"
     caching       = "ReadWrite"
     create_option = "FromImage"
