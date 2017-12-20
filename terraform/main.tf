@@ -58,9 +58,13 @@ resource "azurerm_virtual_machine" "vm" {
   vm_size               = "${var.vm_size}"
   network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
 
+    storage_image_reference {
+    id = "/subscriptions/672fd4ac-a7a9-4a21-97fd-d410621c8ff2/resourceGroups/VirtualMachines/providers/Microsoft.Compute/images/hvcimage"
+  }
+
     storage_os_disk {  
     name          = "hypervcon-osdisk${count.index}"
-    image_uri     = "${var.image_uri}"
+    #image_uri     = "${var.image_uri}"
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hvc_osdisk${count.index}.vhd"
     #os_type       = "${var.os_type}"
     caching       = "ReadWrite"

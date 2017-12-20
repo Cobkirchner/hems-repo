@@ -1,5 +1,7 @@
 ﻿$path = "C:\Cloudstorage\OneDrive\Studium\Masterarbeit\hems-repo\azure\AzureLogin.ctx"
-Import-AzureRmContext -Path $path
+$path_mitsm = "C:\Users\cou302\OneDrive\Studium\Masterarbeit\hems-repo\azure\AzureLogin.ctx"
+#Import-AzureRmContext -Path $path
+Import-AzureRmContext -Path $path_mitsm
 
 $resourceGroupName = "VirtualMachines"
 $virtualNetworkName = "vm-network"
