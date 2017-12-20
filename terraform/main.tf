@@ -64,13 +64,13 @@ resource "azurerm_virtual_machine" "vm" {
     vhd_uri       = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container${count.index}.vhd"
     os_type       = "${var.os_type}"
     caching       = "ReadWrite"
-    create_option = "Attach"
+    create_option = "FromImage"
   }
 
   os_profile {  
     computer_name  = "hypervcon${count.index}"
     admin_username = "${var.admin_username}"
-    admin_password = "${var.admin_password}"
+    admin_password = "${var.admin_password}${count.index}"
   }
 
   os_profile_windows_config {

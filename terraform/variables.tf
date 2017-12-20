@@ -5,7 +5,7 @@ variable "resource_group" {
 
 variable "image_uri" {
   description = "Specifies the image_uri in the form publisherName:offer:skus:version. image_uri can also specify the VHD uri of a custom VM image to clone."
-  default = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container2.vhd"
+  default = "https://hemsstorage.blob.core.windows.net/hemscontainer/hyperv-container1.vhd"
 }
 
 
@@ -52,17 +52,17 @@ variable "vm_size" {
 
 variable "hostname" {
   description = "VM name referenced also in storage-related names. This is also used as the label for the Domain Name and to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-  default = "hypervcontainer-"
+  default = "hypervcon-"
 }
 
 variable "admin_username" {
   description = "administrator user name"
-  default     = "user123"
+  default     = "adminuser"
 }
 
 variable "admin_password" {
   description = "The Password for the account specified in the 'admin_username' field. We recommend disabling Password Authentication in a Production environment."
-  default = "User123-Terraform"
+  default = "HyperV_"
 }
 
 variable "instance_count" {
