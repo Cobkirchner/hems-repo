@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-os.chdir("/terrform/")
+os.chdir("/home/hems-repo/terraform/")
 
 current_directory = os.getcwd()
 print ('current_directory')
