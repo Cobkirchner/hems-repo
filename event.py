@@ -52,13 +52,17 @@ def event_create_insert_into_db(name, type, num_participants, startdatetime, end
     query = "INSERT INTO event(name,type,num_participants,startdatetime,enddatetime,state) " \
             "VALUES(%s,%s,%s,%s,%s,%s)"
     args = (name, type, num_participants, startdatetime, enddatetime, state)
- 
+    sql_event_start = "CREATE EVENT" + name + last_event_id + startdatetime + "ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id =" + last_event_id + ";"
+    sql_event_end = "CREATE EVENT" + name + last_event_id + enddatetime + "ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id =" + last_event_id + ";"
     try:
         db_config = read_db_config()
         conn = MySQLConnection(**db_config)
  
         cursor = conn.cursor()
         cursor.execute(query, args)
+        last_event_id = cursor.lastrowid
+        cursor.execute(sql_event_start)
+        cursor.execute(sql_event_end)
  
         if cursor.lastrowid:
             print('last insert id', cursor.lastrowid)
@@ -72,8 +76,6 @@ def event_create_insert_into_db(name, type, num_participants, startdatetime, end
     finally:
         cursor.close()
         conn.close()
-    last_event_id = cursor.lastrowid
-    print ('Letzte ID:', last_event_id)
 
 
 def event_create():
@@ -81,6 +83,7 @@ def event_create():
     name = raw_input('Eventname: ')
     type = raw_input('Typ: ')
     num_participants = raw_input('Anzahl Teilnehmer: ')
+    
     startdate = raw_input('Startdatum (Format: 2017-01-01): ')
     starttime = raw_input('Startzeit (Format: 06:00): ')
     startdatetime = startdate + " " + starttime +":00"
