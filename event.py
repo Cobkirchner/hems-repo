@@ -85,11 +85,7 @@ def event_create():
     endtime = raw_input('Endzeit (Format: 06:00): ')
     enddatetime = enddate + " " + endtime +":00"
     state ="new"
-    #password = raw_input('Please enter password: ')
-    #print "You entered:", surname, name, email, password
-
-
-event_create_insert_into_db(name, type, num_participants, startdatetime, enddatetime, state)
+    event_create_insert_into_db(name, type, num_participants, startdatetime, enddatetime, state)
 
 #Event update
 
