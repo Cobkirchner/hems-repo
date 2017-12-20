@@ -88,11 +88,13 @@ def event_create():
     num_participants = raw_input('Anzahl Teilnehmer: ')
     
     startdate = raw_input('Startdatum (Format: 2017-01-01): ')
-    starttime = raw_input('Startzeit (Format: 06:00): ')
-    startdatetime = startdate + " " + starttime +":00"
+    #starttime = raw_input('Startzeit (Format: 06:00): ')
+    startdatetime = startdate + " 01:00:00"
+    #startdatetime = startdate + " " + starttime +":00"
     enddate = raw_input('Enddatum (Format: 2017-01-01): ')
-    endtime = raw_input('Endzeit (Format: 06:00): ')
-    enddatetime = enddate + " " + endtime +":00"
+    #endtime = raw_input('Endzeit (Format: 06:00): ')
+    enddatetime = enddate + " 20:00:00"
+    #enddatetime = enddate + " " + endtime +":00"
     state ="new"
     event_create_insert_into_db(name, type, num_participants, startdatetime, enddatetime, state)
 
