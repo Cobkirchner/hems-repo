@@ -48,6 +48,48 @@ def event_read():
 
 
 #Event create
+def event_create_insert_into_db(name, type, num_participants, startdatetime, enddatetime, state):
+    query = "INSERT INTO event(name,type,num_participants,startdatetime,enddatetime,state) " \
+            "VALUES(%s,%s,%s,%s,%s,%s)"
+    args = (name, type, num_participants, startdatetime, enddatetime, state)
+ 
+    try:
+        db_config = read_db_config()
+        conn = MySQLConnection(**db_config)
+ 
+        cursor = conn.cursor()
+        cursor.execute(query, args)
+ 
+        if cursor.lastrowid:
+            print('last insert id', cursor.lastrowid)
+        else:
+            print('last insert id not found')
+ 
+        conn.commit()
+    except Error as error:
+        print(error)
+ 
+    finally:
+        cursor.close()
+        conn.close()
+
+def event_create():
+print "Bitte füllen Sie die folgenden Felder aus:"
+name = raw_input('Eventname: ')
+typ = raw_input('Typ: ')
+num_participants = raw_input('Anzahl Teilnehmer: ')
+startdate = raw_input('Startdatum (Format: 2017-01-01): ')
+starttime = raw_input('Startzeit (Format: 06:00): ')
+startdatetime = startdate + " " + starttime +":00"
+enddate = raw_input('Enddatum (Format: 2017-01-01): ')
+endtime = raw_input('Endzeit (Format: 06:00): ')
+enddatetime = enddate + " " + endtime +":00"
+state ="new"
+#password = raw_input('Please enter password: ')
+#print "You entered:", surname, name, email, password
+
+
+event_create_insert_into_db(name, type, num_participants, startdatetime, enddatetime, state)
 
 #Event update
 
