@@ -76,7 +76,7 @@ def event_create_insert_into_db(name, type, num_participants, startdatetime, end
 def event_create():
     print ('Bitte füllen Sie die folgenden Felder aus:')
     name = raw_input('Eventname: ')
-    typ = raw_input('Typ: ')
+    type = raw_input('Typ: ')
     num_participants = raw_input('Anzahl Teilnehmer: ')
     startdate = raw_input('Startdatum (Format: 2017-01-01): ')
     starttime = raw_input('Startzeit (Format: 06:00): ')
