@@ -72,6 +72,9 @@ def event_create_insert_into_db(name, type, num_participants, startdatetime, end
     finally:
         cursor.close()
         conn.close()
+    last_event_id = cursor.lastrowid
+    print ("Letzte ID:', last_event_id)
+
 
 def event_create():
     print ('Bitte füllen Sie die folgenden Felder aus:')
@@ -137,7 +140,8 @@ menupoint_2 = "2. Event hinzufügen"
 menupoint_3 = "3. Event löschen"
 menupoint_4 = "4. Event ändern"
 menupoint_5 = "5. Instanzen zu einem Event anzeigen"
-menupoint_6 = "6. Ende"
+menupoint_6 = "6. Zurück"
+menupoint_7 = "7. Ende"
 
 def print_menu():       ## Your menu design here
     print 30 * "-" , "MENU" , 30 * "-"
@@ -147,6 +151,7 @@ def print_menu():       ## Your menu design here
     print menupoint_4
     print menupoint_5
     print menupoint_6
+    print menupoint_7
     print 67 * "-"
   
 loop=True      
@@ -171,7 +176,10 @@ while loop:          ## While loop which will keep going until loop = False
         print menupoint_5
         instances_read()
     elif choice==6:
-        print menupoint_5
+        print menupoint_6
+        execfile('startmenu.py')   
+    elif choice==7:
+        print menupoint_7
         exit()    
         loop=False # This will make the while loop to end as not value of loop is set to False
     else:
