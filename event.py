@@ -59,19 +59,20 @@ def event_create_insert_into_db(name, type, num_participants, startdatetime, end
  
         cursor = conn.cursor()
         cursor.execute(query, args)
-        
-        last_event_id = cursor.lastrowid
-        sql_event_start = "CREATE EVENT " + name + str(last_event_id)+"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + str(last_event_id) + ";"
-        sql_event_end = "CREATE EVENT " + name + str(last_event_id)+"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + str(last_event_id) + ";"
-        
-        cursor.execute(sql_event_start)
-        cursor.execute(sql_event_end)
- 
+
         if cursor.lastrowid:
             print('last insert id', cursor.lastrowid)
         else:
             print('last insert id not found')
+        
+        last_event_id = cursor.lastrowid
+        sql_event_start = "CREATE EVENT " + name + "id" + str(last_event_id)+"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + str(last_event_id) + ";"
+        sql_event_end = "CREATE EVENT " + name + "id" + str(last_event_id)+"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + str(last_event_id) + ";"
+        
+        cursor.execute(sql_event_start)
+        cursor.execute(sql_event_end)
  
+         
         conn.commit()
     except Error as error:
         print(error)
