@@ -73,7 +73,7 @@ def event_create_insert_into_db(name, type, num_participants, startdatetime, end
         cursor.close()
         conn.close()
     last_event_id = cursor.lastrowid
-    print ("Letzte ID:', last_event_id)
+    print ('Letzte ID:', last_event_id)
 
 
 def event_create():
