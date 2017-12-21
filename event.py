@@ -145,9 +145,9 @@ def event_update():
     enddate = raw_input('Enddatum (Format: 2017-01-01): ')
     enddatetime = enddate + " 20:00:00"
     state ="new"
-    update_query = "UPDATE event SET name = "+name+", type = "+type+", num_participants = "+num_participants+", startdatetime = "+startdatetime+", enddatetime = "+enddatetime+", state = "+state+" WHERE ID = "+select_id+";"
-    sql_event_start_alter = "ALTER EVENT " + name + "id" + select_id+"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + select_id + ";"
-    sql_event_end_alter = "ALTER EVENT " + name + "id" + select_id+"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + select_id + ";"
+    update_query = "UPDATE event SET name = "+ name +", type = "+ type +", num_participants = "+ num_participants +", startdatetime = "+ startdatetime +", enddatetime = "+ enddatetime +", state = "+ state +" WHERE ID = "+ select_id +";"
+    sql_event_start_alter = "ALTER EVENT " + name + "id" + select_id +"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + select_id + ";"
+    sql_event_end_alter = "ALTER EVENT " + name + "id" + select_id +"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + select_id + ";"
         
     try:
         dbconfig = read_db_config()
