@@ -150,7 +150,9 @@ def event_update():
     enddatetime = enddate + " 20:00:00"
     print (enddatetime)
     state ="new"
-    update_query = "UPDATE event SET name = "+ name +", type = "+ type +", num_participants = "+ num_participants +", startdatetime = "+ startdatetime +", enddatetime = "+ enddatetime +", state = "+ state +" WHERE ID = "+ select_id +";"
+    update_query = "UPDATE event SET name=%s, type=%s, num_participants=%s, startdatetime=%s, enddatetime=%s, state=%s WHERE id=%s
+    args = (name, type, num_participants, startdatetime, enddatetime, state, select_id)
+    #update_query = "UPDATE event SET name = "+ name +", type = "+ type +", num_participants = "+ num_participants +", startdatetime = "+ startdatetime +", enddatetime = "+ enddatetime +", state = "+ state +" WHERE ID = "+ select_id +";"
     sql_event_start_alter = "ALTER EVENT " + name + "id" + select_id +"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + select_id + ";"
     sql_event_end_alter = "ALTER EVENT " + name + "id" + select_id +"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + select_id + ";"
         
@@ -158,7 +160,7 @@ def event_update():
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
-        cursor.execute(update_query)
+        cursor.execute(update_query, args)
         cursor.execute(sql_event_start_alter)
         cursor.execute(sql_event_start_alter)
         results = cursor.fetchall()
