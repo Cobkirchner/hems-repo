@@ -101,7 +101,7 @@ def event_update():
     print ('Bitte wählen Sie anhand der ID ein Event aus:')
     select_id = raw_input('ID: ')
 
-    select_query = "SELECT * FROM events WHERE ID = "+select_id+";"    
+    select_query = "SELECT * FROM event WHERE ID = "+select_id+";"    
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
