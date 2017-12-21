@@ -161,9 +161,9 @@ def event_update():
         cursor = conn.cursor()
         cursor.execute(update_query, args)
         cursor.execute(sql_event_start_drop)
-        cursor.execute(sql_event_start_drop)
+        cursor.execute(sql_event_end_drop)
         cursor.execute(sql_event_start)
-        cursor.execute(sql_event_start)
+        cursor.execute(sql_event_end)
         results = cursor.fetchall()
 
         widths = []
