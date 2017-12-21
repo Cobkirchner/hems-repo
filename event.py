@@ -138,31 +138,32 @@ def event_update():
 
     print ('Bitte geben Sie die zu ändernden Daten ein:')
     name = raw_input('Eventname: ')
-    print (name)
     type = raw_input('Typ: ')
-    print (type)
+
     num_participants = raw_input('Anzahl Teilnehmer: ')
-    print (num_participants)
+
     startdate = raw_input('Startdatum (Format: 2017-01-01): ')
     startdatetime = startdate + " 01:00:00"
-    print (startdatetime)
+
     enddate = raw_input('Enddatum (Format: 2017-01-01): ')
     enddatetime = enddate + " 20:00:00"
-    print (enddatetime)
     state ="new"
     update_query = "UPDATE event SET name=%s, type=%s, num_participants=%s, startdatetime=%s, enddatetime=%s, state=%s WHERE id=%s"
     args = (name, type, num_participants, startdatetime, enddatetime, state, select_id)
-    #update_query = "UPDATE event SET name = "+ name +", type = "+ type +", num_participants = "+ num_participants +", startdatetime = "+ startdatetime +", enddatetime = "+ enddatetime +", state = "+ state +" WHERE ID = "+ select_id +";"
-    sql_event_start_alter = "ALTER EVENT " + name + "id" + select_id +"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + select_id + ";"
-    sql_event_end_alter = "ALTER EVENT " + name + "id" + select_id +"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + select_id + ";"
-        
+    sql_event_start_drop = "DROP EVENT [IF EXISTS]"  + name + "id" + select_id +"start"+"
+    sql_event_end_drop = "DROP EVENT [IF EXISTS]"  + name + "id" + select_id +"start"+"
+    sql_event_start = "CREATE EVENT " + name + "id" + select_id +"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + str(last_event_id) + ";"
+    sql_event_end = "CREATE EVENT " + name + "id" + select_id +"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + str(last_event_id) + ";"
+            
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
         cursor.execute(update_query, args)
-        cursor.execute(sql_event_start_alter)
-        cursor.execute(sql_event_start_alter)
+        cursor.execute(sql_event_start_drop)
+        cursor.execute(sql_event_start_drop)
+        cursor.execute(sql_event_start)
+        cursor.execute(sql_event_start)
         results = cursor.fetchall()
 
         widths = []
