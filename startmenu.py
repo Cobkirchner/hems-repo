@@ -31,7 +31,7 @@ while loop:          ## While loop which will keep going until loop = False
         execfile('menu_training_provider.py')
     elif choice==3:
         print menupoint_2
-        execfile('menu_training_provider.py')
+        execfile('menu_training_provider_admin.py')
     elif choice==4:
         print menupoint_3
         exit()    

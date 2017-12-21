@@ -87,30 +87,114 @@ def event_create():
     name = raw_input('Eventname: ')
     type = raw_input('Typ: ')
     num_participants = raw_input('Anzahl Teilnehmer: ')
-    
     startdate = raw_input('Startdatum (Format: 2017-01-01): ')
-    #starttime = raw_input('Startzeit (Format: 06:00): ')
     startdatetime = startdate + " 01:00:00"
-    #startdatetime = startdate + " " + starttime +":00"
     enddate = raw_input('Enddatum (Format: 2017-01-01): ')
-    #endtime = raw_input('Endzeit (Format: 06:00): ')
     enddatetime = enddate + " 20:00:00"
-    #enddatetime = enddate + " " + endtime +":00"
-    state ="new"
+    state = "new"
     event_create_insert_into_db(name, type, num_participants, startdatetime, enddatetime, state)
 
 #Event update
+def event_update():
+    event_read()
+
+    print ('Bitte wählen Sie anhand der ID ein Event aus:')
+    select_id = raw_input('ID: ')
+
+    select_query = "SELECT * FROM events WHERE ID = "+select_id+";"    
+        try:
+            dbconfig = read_db_config()
+            conn = MySQLConnection(**dbconfig)
+            cursor = conn.cursor()
+            cursor.execute(select_query)
+            results = cursor.fetchall()
+    
+            widths = []
+            columns = []
+            tavnit = '|'
+            separator = '+' 
+
+            for cd in cursor.description:
+                widths.append(max(cd[2], len(cd[0])))
+                columns.append(cd[0])
+
+            for w in widths:
+                tavnit += " %-"+"%ss |" % (w,)
+                separator += '-'*w + '--+'
+
+            print(separator)
+            print(tavnit % tuple(columns))
+            print(separator)
+            for row in results:
+                print(tavnit % row)
+            print(separator)
+
+        except Error as e:
+            print(e)
+    
+        finally:
+            cursor.close()
+            conn.close()
+print ('Bitte geben Sie die zu ändernden Daten ein:')
+    name = raw_input('Eventname: ')
+    type = raw_input('Typ: ')
+    num_participants = raw_input('Anzahl Teilnehmer: ')
+    startdate = raw_input('Startdatum (Format: 2017-01-01): ')
+    startdatetime = startdate + " 01:00:00"
+    enddate = raw_input('Enddatum (Format: 2017-01-01): ')
+    enddatetime = enddate + " 20:00:00"
+    state ="new"
+    update_query = "UPDATE events SET name = "+name+", type = "+type+", num_participants = "+num_participants+", startdatetime = "+startdatetime+",enddatetime = "+enddatetime+", state = "+state+" WHERE ID = "+select_id+";"
+    sql_event_start_alter = "ALTER EVENT " + name + "id" + select_id+"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + select_id + ";"
+    sql_event_end_alter = "ALTER EVENT " + name + "id" + select_id+"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + select_id + ";"
+        
+try:
+        dbconfig = read_db_config()
+        conn = MySQLConnection(**dbconfig)
+        cursor = conn.cursor()
+        cursor.execute(update_query)
+        cursor.execute(select_query)
+        cursor.execute(sql_event_start_alter)
+        cursor.execute(sql_event_start_alter)
+        results = cursor.fetchall()
+    
+            widths = []
+            columns = []
+            tavnit = '|'
+            separator = '+' 
+
+            for cd in cursor.description:
+                widths.append(max(cd[2], len(cd[0])))
+                columns.append(cd[0])
+
+            for w in widths:
+                tavnit += " %-"+"%ss |" % (w,)
+                separator += '-'*w + '--+'
+
+            print(separator)
+            print(tavnit % tuple(columns))
+            print(separator)
+            for row in results:
+                print(tavnit % row)
+            print(separator)
+except Error as e:
+    print(e)
+
+finally:
+    cursor.close()
+    conn.close()
+
 
 #Event delete
 
 #Instances read
 def instances_read():
-    print "Event ID: 4"
+
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM instances")
+        cursor.execute()
         results = cursor.fetchall()
  
         widths = []
@@ -152,7 +236,7 @@ menupoint_5 = "5. Instanzen zu einem Event anzeigen"
 menupoint_6 = "6. Zurück"
 menupoint_7 = "7. Ende"
 
-def print_menu():       ## Your menu design here
+def print_menu():
     print 30 * "-" , "MENU" , 30 * "-"
     print menupoint_1
     print menupoint_2
@@ -165,8 +249,8 @@ def print_menu():       ## Your menu design here
   
 loop=True      
   
-while loop:          ## While loop which will keep going until loop = False
-    print_menu()    ## Displays menu
+while loop:
+    print_menu() 
     choice = input("Ihre Auswahl [1-7]: ")
      
     if choice==1:     
@@ -180,7 +264,7 @@ while loop:          ## While loop which will keep going until loop = False
         ## You can add your code or functions here
     elif choice==4:
         print menupoint_4
-        ## You can add your code or functions here
+        event_update()
     elif choice==5:
         print menupoint_5
         instances_read()
