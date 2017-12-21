@@ -102,81 +102,82 @@ def event_update():
     select_id = raw_input('ID: ')
 
     select_query = "SELECT * FROM events WHERE ID = "+select_id+";"    
-        try:
-            dbconfig = read_db_config()
-            conn = MySQLConnection(**dbconfig)
-            cursor = conn.cursor()
-            cursor.execute(select_query)
-            results = cursor.fetchall()
-    
-            widths = []
-            columns = []
-            tavnit = '|'
-            separator = '+' 
-
-            for cd in cursor.description:
-                widths.append(max(cd[2], len(cd[0])))
-                columns.append(cd[0])
-
-            for w in widths:
-                tavnit += " %-"+"%ss |" % (w,)
-                separator += '-'*w + '--+'
-
-            print(separator)
-            print(tavnit % tuple(columns))
-            print(separator)
-            for row in results:
-                print(tavnit % row)
-            print(separator)
-
-        except Error as e:
-            print(e)
-    
-        finally:
-            cursor.close()
-            conn.close()
-print ('Bitte geben Sie die zu ändernden Daten ein:')
-    name = raw_input('Eventname: ')
-    type = raw_input('Typ: ')
-    num_participants = raw_input('Anzahl Teilnehmer: ')
-    startdate = raw_input('Startdatum (Format: 2017-01-01): ')
-    startdatetime = startdate + " 01:00:00"
-    enddate = raw_input('Enddatum (Format: 2017-01-01): ')
-    enddatetime = enddate + " 20:00:00"
-    state ="new"
-    update_query = "UPDATE events SET name = "+name+", type = "+type+", num_participants = "+num_participants+", startdatetime = "+startdatetime+",enddatetime = "+enddatetime+", state = "+state+" WHERE ID = "+select_id+";"
-    sql_event_start_alter = "ALTER EVENT " + name + "id" + select_id+"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + select_id + ";"
-    sql_event_end_alter = "ALTER EVENT " + name + "id" + select_id+"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + select_id + ";"
-        
 try:
-        dbconfig = read_db_config()
-        conn = MySQLConnection(**dbconfig)
-        cursor = conn.cursor()
-        cursor.execute(update_query)
-        cursor.execute(select_query)
-        cursor.execute(sql_event_start_alter)
-        cursor.execute(sql_event_start_alter)
-        results = cursor.fetchall()
+    dbconfig = read_db_config()
+    conn = MySQLConnection(**dbconfig)
+    cursor = conn.cursor()
+    cursor.execute(select_query)
+    results = cursor.fetchall()
+
+    widths = []
+    columns = []
+    tavnit = '|'
+    separator = '+' 
+
+    for cd in cursor.description:
+        widths.append(max(cd[2], len(cd[0])))
+        columns.append(cd[0])
+
+    for w in widths:
+        tavnit += " %-"+"%ss |" % (w,)
+        separator += '-'*w + '--+'
+
+    print(separator)
+    print(tavnit % tuple(columns))
+    print(separator)
+    for row in results:
+        print(tavnit % row)
+    print(separator)
+
+except Error as e:
+    print(e)
+
+finally:
+    cursor.close()
+    conn.close()
+
+print ('Bitte geben Sie die zu ändernden Daten ein:')
+name = raw_input('Eventname: ')
+type = raw_input('Typ: ')
+num_participants = raw_input('Anzahl Teilnehmer: ')
+startdate = raw_input('Startdatum (Format: 2017-01-01): ')
+startdatetime = startdate + " 01:00:00"
+enddate = raw_input('Enddatum (Format: 2017-01-01): ')
+enddatetime = enddate + " 20:00:00"
+state ="new"
+update_query = "UPDATE events SET name = "+name+", type = "+type+", num_participants = "+num_participants+", startdatetime = "+startdatetime+",enddatetime = "+enddatetime+", state = "+state+" WHERE ID = "+select_id+";"
+sql_event_start_alter = "ALTER EVENT " + name + "id" + select_id+"start" + " ON SCHEDULE AT '" + startdatetime + "' DO UPDATE hems.event SET state = 'ready' WHERE id = " + select_id + ";"
+sql_event_end_alter = "ALTER EVENT " + name + "id" + select_id+"end" + " ON SCHEDULE AT '" + enddatetime + "' DO UPDATE hems.event SET state = 'deprovison' WHERE id = " + select_id + ";"
     
-            widths = []
-            columns = []
-            tavnit = '|'
-            separator = '+' 
+try:
+    dbconfig = read_db_config()
+    conn = MySQLConnection(**dbconfig)
+    cursor = conn.cursor()
+    cursor.execute(update_query)
+    cursor.execute(select_query)
+    cursor.execute(sql_event_start_alter)
+    cursor.execute(sql_event_start_alter)
+    results = cursor.fetchall()
 
-            for cd in cursor.description:
-                widths.append(max(cd[2], len(cd[0])))
-                columns.append(cd[0])
+    widths = []
+    columns = []
+    tavnit = '|'
+    separator = '+' 
 
-            for w in widths:
-                tavnit += " %-"+"%ss |" % (w,)
-                separator += '-'*w + '--+'
+    for cd in cursor.description:
+        widths.append(max(cd[2], len(cd[0])))
+        columns.append(cd[0])
 
-            print(separator)
-            print(tavnit % tuple(columns))
-            print(separator)
-            for row in results:
-                print(tavnit % row)
-            print(separator)
+    for w in widths:
+        tavnit += " %-"+"%ss |" % (w,)
+        separator += '-'*w + '--+'
+
+    print(separator)
+    print(tavnit % tuple(columns))
+    print(separator)
+    for row in results:
+        print(tavnit % row)
+    print(separator)
 except Error as e:
     print(e)
 
