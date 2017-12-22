@@ -194,6 +194,26 @@ def event_update():
 
 
 #Event delete
+def event_delete():
+    event_read()
+
+    print ('Bitte wählen Sie anhand der ID das Event aus, welches Sie löschen wollen:')
+    select_id = raw_input('ID: ')
+
+    select_query = "DELETE * FROM event WHERE ID = "+select_id+";"    
+    try:
+        dbconfig = read_db_config()
+        conn = MySQLConnection(**dbconfig)
+        cursor = conn.cursor()
+        cursor.execute(select_query)
+        results = cursor.fetchall()
+
+    except Error as e:
+        print(e)
+
+    finally:
+        cursor.close()
+        conn.close()
 
 #Instances read
 def instances_read():

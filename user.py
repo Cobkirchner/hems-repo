@@ -138,12 +138,32 @@ def user_update(surname, name, email):
     # password = raw_input('You can enter a custom password: ')
 
     if not all ([surname, name, email]):
-        print "Bitte füllen Sie alle Felder aus"
+        print ('Bitte füllen Sie alle Felder aus')
         ask() 
     
     user_update_insert_into_db
 
 #user delete
+def user_delete():
+    user_read()
+
+    print ('Bitte wählen Sie anhand der ID den User aus, welchen Sie löschen wollen:')
+    select_id = raw_input('ID: ')
+
+    select_query = "DELETE * FROM user WHERE ID = "+select_id+";"    
+    try:
+        dbconfig = read_db_config()
+        conn = MySQLConnection(**dbconfig)
+        cursor = conn.cursor()
+        cursor.execute(select_query)
+        results = cursor.fetchall()
+
+    except Error as e:
+        print(e)
+
+    finally:
+        cursor.close()
+        conn.close()
 
 
 
