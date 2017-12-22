@@ -77,26 +77,26 @@ def user_create_insert_into_db(surname, name, email, password):
         conn.close()
 
 def user_create():
-print ('Bitte füllen Sie die folgenden Felder aus:')
-surname = raw_input('Vorname: ')
-name = raw_input('Nachname: ')
-email = raw_input('E-Mail: ')
-#password = raw_input('Please enter password: ')
-#print "You entered:", surname, name, email, password
+    print ('Bitte füllen Sie die folgenden Felder aus:')
+    surname = raw_input('Vorname: ')
+    name = raw_input('Nachname: ')
+    email = raw_input('E-Mail: ')
+    #password = raw_input('Please enter password: ')
+    #print "You entered:", surname, name, email, password
 
 
 
-alphabet = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-pw_length = 8
-mypw = ""
+    alphabet = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    pw_length = 8
+    mypw = ""
 
-for i in range(pw_length):
-    next_index = random.randrange(len(alphabet))
-    mypw = mypw + alphabet[next_index]
+    for i in range(pw_length):
+        next_index = random.randrange(len(alphabet))
+        mypw = mypw + alphabet[next_index]
 
-password = mypw
+    password = mypw
 
-user_create_insert_into_db(surname, name, email, password)
+    user_create_insert_into_db(surname, name, email, password)
 
 
 #user update
