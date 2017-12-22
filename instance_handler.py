@@ -14,7 +14,7 @@ def get_num_participants():
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
         cursor.execute("""SELECT num_participants FROM event WHERE state = "ready";""")
-        result = cursor.fetchone()[0]()
+        result = cursor.fetchone()[0]
 
         widths = []
         columns = []
