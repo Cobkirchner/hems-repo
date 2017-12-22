@@ -150,7 +150,7 @@ def user_delete():
     print ('Bitte wählen Sie anhand der ID den User aus, welchen Sie löschen wollen:')
     select_id = raw_input('ID: ')
 
-    select_query = "DELETE * FROM user WHERE ID = "+ select_id +";"    
+    select_query = "DELETE FROM user WHERE ID = "+ select_id +";"    
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
