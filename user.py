@@ -77,7 +77,7 @@ def user_create_insert_into_db(surname, name, email, password):
         conn.close()
 
 def user_create():
-print "Bitte füllen Sie die folgenden Felder aus:"
+print ('Bitte füllen Sie die folgenden Felder aus:')
 surname = raw_input('Vorname: ')
 name = raw_input('Nachname: ')
 email = raw_input('E-Mail: ')
