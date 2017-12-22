@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#Event Verwaltung
+#Instance Handler
+# Exectution every hour, stored in crontab: 0 * * * * /home/hems-repo/instance_handler.py
 #Import section
 import sys
 from mysql.connector import MySQLConnection, Error
