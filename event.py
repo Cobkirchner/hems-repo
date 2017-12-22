@@ -259,9 +259,8 @@ menupoint_1 = "1. Events anzeigen"
 menupoint_2 = "2. Event hinzufügen"
 menupoint_3 = "3. Event löschen"
 menupoint_4 = "4. Event ändern"
-menupoint_5 = "5. Instanzen zu einem Event anzeigen"
-menupoint_6 = "6. Zurück"
-menupoint_7 = "7. Ende"
+menupoint_5 = "6. Zurück"
+menupoint_6 = "7. Ende"
 
 def print_menu():
     print 30 * "-" , "MENU" , 30 * "-"
@@ -271,14 +270,13 @@ def print_menu():
     print menupoint_4
     print menupoint_5
     print menupoint_6
-    print menupoint_7
     print 67 * "-"
   
 loop=True      
   
 while loop:
     print_menu() 
-    choice = input("Ihre Auswahl [1-7]: ")
+    choice = input("Ihre Auswahl [1-6]: ")
      
     if choice==1:     
         print menupoint_1
@@ -293,12 +291,9 @@ while loop:
         print menupoint_4
         event_update()
     elif choice==5:
-        print menupoint_5
-        instances_read()
-    elif choice==6:
         print menupoint_6
         execfile('startmenu.py')   
-    elif choice==7:
+    elif choice==6:
         print menupoint_7
         exit()    
         loop=False # This will make the while loop to end as not value of loop is set to False

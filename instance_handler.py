@@ -44,6 +44,24 @@ def get_num_participants():
     mail (result)
 
 
+# declaration of the default mail settings
+#
+
+# mail address of the sender
+sender = 'mitsmhems@gmail.com'
+
+# fully qualified domain name of the mail server
+smtpserver = 'smtp.gmail.com'
+
+# username for the SMTP authentication
+smtpusername = 'mitsmhems@gmail.com'
+
+# password for the SMTP authentication
+smtppassword = 'hems@2017'
+
+# use TLS encryption for the connection
+usetls = True
+
 def sendmail(recipient,subject,content):
     
   # generate a RFC 2822 message
