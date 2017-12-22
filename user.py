@@ -129,7 +129,7 @@ def user_update_insert_into_db(surname, name, email):
         cursor.close()
         conn.close()
  
-def user_update(surname, name, email):
+def user_update():
     
     print ('Welche Nutzerdaten wollen Sie ändern? Bitte füllen Sie die folgenden Felder aus:')
     surname = raw_input('Vorname ')
