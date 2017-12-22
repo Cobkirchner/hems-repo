@@ -43,6 +43,7 @@ def get_num_participants():
     fileHandle.write ( 'default = '+ str(result) + '}' )
     fileHandle.close()
 
+    os.chdir("/home/hems-repo/terraform/")
     subprocess.call(["terraform", "apply"])
 
     mail (result)
