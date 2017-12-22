@@ -16,7 +16,9 @@ def get_num_participants():
         cursor.execute("""SELECT num_participants FROM event WHERE state = "ready";""")
         result = cursor.fetchone()[0]
         print (result)
-    
+        cursor.execute("""SELECT id FROM event WHERE state = "ready";""")
+        result_id = cursor.fetchone()[0]
+        print (result_id)
     except Error as e:
         print(e)
 
