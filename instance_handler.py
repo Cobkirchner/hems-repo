@@ -78,7 +78,7 @@ def mail(result):
   # call sendmail() and generate a new mail with specified subject and content
   recipent = 'christian.obkirchner@outlook.com'
   subject = 'Neue Instanzen erstellt'
-  message = 'Es wurden '+ stra(result) + ' Instanzen erstellt.'
+  message = 'Es wurden '+ str(result) + ' Instanzen erstellt.'
   sendmail(recipent,subject,message)
 
   # quit python script
