@@ -10,8 +10,9 @@ from python_mysql_dbconfig import read_db_config
 from email.mime.text import MIMEText
 import smtplib
 import sys
-
 from shutil import copyfile
+import subprocess
+import os
 
 
 def get_num_participants(): 
@@ -40,6 +41,8 @@ def get_num_participants():
     fileHandle = open ( '/home/hems-repo/terraform/variables.tf', 'a' )
     fileHandle.write ( 'default = '+ str(result) + '}' )
     fileHandle.close()
+
+    subprocess.call(["terraform", "apply"])
 
     mail (result)
 
