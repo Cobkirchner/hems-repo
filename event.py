@@ -206,8 +206,7 @@ def event_delete():
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
         cursor.execute(select_query)
-        results = cursor.fetchall()
-
+        conn.commit()
     except Error as e:
         print(e)
 

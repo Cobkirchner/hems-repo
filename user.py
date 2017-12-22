@@ -115,7 +115,7 @@ def user_update_insert_into_db(surname, name, email):
     try:
         conn = MySQLConnection(**db_config)
  
-        # update book title
+        # update
         cursor = conn.cursor()
         cursor.execute(query, data)
  
@@ -150,13 +150,14 @@ def user_delete():
     print ('Bitte wählen Sie anhand der ID den User aus, welchen Sie löschen wollen:')
     select_id = raw_input('ID: ')
 
-    select_query = "DELETE FROM user WHERE ID = "+ select_id +";"    
+    delete_query = "DELETE FROM user WHERE ID = "+ select_id +";"    
     try:
         dbconfig = read_db_config()
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
-        cursor.execute(select_query)
-        results = cursor.fetchall()
+        cursor.execute(delete_query)
+
+        conn.commit()
 
     except Error as e:
         print(e)
