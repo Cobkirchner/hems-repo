@@ -141,7 +141,7 @@ def user_update(surname, name, email):
         print ('Bitte füllen Sie alle Felder aus')
         ask() 
     
-    user_update_insert_into_db
+    user_update_insert_into_db (surname, name, email)
 
 #user delete
 def user_delete():
