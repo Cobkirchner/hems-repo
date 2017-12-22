@@ -29,7 +29,7 @@ def get_num_participants():
         print (result_id)
         #update_query = "UPDATE event SET state = "provisoned" WHERE id = "+ result_id +";"
         cursor.execute("""UPDATE event SET state = "provisoned" WHERE id = "+ result_id +";""")
-        cursor.commit()
+        conn.commit()
     except Error as e:
         print(e)
 
