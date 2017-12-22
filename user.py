@@ -170,7 +170,7 @@ def user_delete():
 #Menu selection
 menupoint_1 = "1. Nutzer anzeigen"
 menupoint_2 = "2. Nutzer hinzufügen"
-menupoint_3 = "3. Nutzer anzeigen"
+menupoint_3 = "3. Nutzer updaten"
 menupoint_4 = "4. Nutzer löschen"
 menupoint_5 = "5. Ende"
 
@@ -197,10 +197,10 @@ while loop:          ## While loop which will keep going until loop = False
         user_create()
     elif choice==3:
         print menupoint_3
-        ## You can add your code or functions here
+        user_update()
     elif choice==4:
         print menupoint_4
-        ## You can add your code or functions here
+        user_delete()
     elif choice==5:
         print menupoint_5
         exit()    
