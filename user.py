@@ -101,16 +101,16 @@ def user_create():
 
 #user update
 
-def user_update_insert_into_db(surname, name, email):
+def user_update_insert_into_db(select_id, surname, name, email):
     # read database configuration
     db_config = read_db_config()
  
     # prepare query and data
     query = """ UPDATE user
-                SET surname,name,email = %s
-                WHERE email = %s """
+                SET surname = %s,name = %s,email = %s
+                WHERE id = %s """
  
-    data = (surname, name, email)
+    data = (surname, name, email, select_id)
  
     try:
         conn = MySQLConnection(**db_config)
@@ -132,16 +132,16 @@ def user_update_insert_into_db(surname, name, email):
 def user_update():
     user_read()
     print ('Welche Nutzerdaten wollen Sie ändern? Bitte füllen Sie die folgenden Felder aus:')
+    select_id = raw_input('ID: ')
     surname = raw_input('Vorname ')
     name = raw_input('Nachname ')
     email = raw_input('E-Mailadresse: ') 
     # password = raw_input('You can enter a custom password: ')
 
-    if not all ([surname, name, email]):
+    if not all ([select_id, surname, name, email]):
         print ('Bitte füllen Sie alle Felder aus')
-        ask() 
     
-    user_update_insert_into_db (surname, name, email)
+    user_update_insert_into_db (select_id, surname, name, email)
 
 #user delete
 def user_delete():
